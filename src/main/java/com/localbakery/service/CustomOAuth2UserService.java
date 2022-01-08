@@ -31,7 +31,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        System.out.println("test");
         try {
             return processOAuthUser(userRequest, oAuth2User);
         } catch (AuthenticationException e) {
@@ -47,10 +46,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     private OAuth2User processOAuthUser(OAuth2UserRequest userRequest, OAuth2User oAuth2User) {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory
                 .getOAuth2UserInfo(userRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
-
-        if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
-            throw new OAuth2AuthenticationProcessingException("OAuth2 공급자(구글, 네이버 등)에서 이메일을 찾을 수 없습니다.");
-        }
 
         Optional<Account> userOptional = Optional.ofNullable(mapperService.findByEmail(oAuth2UserInfo.getEmail()));
         Account account;
