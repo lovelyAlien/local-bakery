@@ -15,7 +15,7 @@ public interface AccountMapper {
 
     @Insert("INSERT INTO accounts(email , user_name) VALUES  (#{email}, #{userName})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void saveAccount(@Param("email") String email, @Param("userName") String userName);
+    void saveAccount(Account account);
 
     @Select("SELECT * FROM accounts WHERE email = #{email}")
     Account findByEmail(@Param("email") String email);

@@ -19,7 +19,7 @@ public class MapperService {
     public Account saveAccount(Account account) {
 
         Account newAccount = new Account(account.getEmail(), account.getUserName());
-        mapper.saveAccount(account.getEmail(), account.getUserName());
+        mapper.saveAccount(newAccount);
 
         return newAccount;
     }
