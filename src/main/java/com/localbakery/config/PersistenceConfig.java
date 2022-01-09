@@ -16,10 +16,9 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@PropertySource("classpath:/application.properties") //①
+@PropertySource("classpath:/application.properties")
 public class PersistenceConfig {
 
-    //③
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() throws Exception {
