@@ -1,6 +1,7 @@
 package com.localbakery.config;
 
 import com.localbakery.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.localbakery.oauth2.OAuth2AuthenticationFailureHandler;
 import com.localbakery.oauth2.OAuth2AuthenticationSuccessHandler;
 import com.localbakery.service.CustomOAuth2UserService;
 import com.nimbusds.oauth2.sdk.Role;
@@ -26,6 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    @Autowired
+    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
@@ -55,7 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler);
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .failureHandler(oAuth2AuthenticationFailureHandler);
     }
 
     @Override
