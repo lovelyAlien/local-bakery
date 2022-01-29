@@ -1,1 +1,4 @@
 rootProject.name = 'localBakery'
+include 'bakery-domain'
+include 'bakery-search-service'
+
