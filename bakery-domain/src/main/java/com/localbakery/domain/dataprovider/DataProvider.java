@@ -36,20 +36,20 @@ public class DataProvider {
         FileReader fileReader = new FileReader(new ClassPathResource(STORE_FILE).getFile());
         CSVReader csvReader = new CSVReader(fileReader);
         csvReader.readNext(); // skip headers
-        while(csvReader.iterator().hasNext()) {
+        log.info("started to add store datas");
+        while (csvReader.iterator().hasNext()) {
             Store store = assembleStore(csvReader.readNext());
             if (store != null) {
-                log.info(store.getName());
                 storeRepository.save(store);
             }
         }
-
+        log.info("finished. adding store datas");
     }
 
     private Store assembleStore(String[] source) {
         if (source == null)
             return null;
-        Point point = new GeometryFactory().createPoint(new Coordinate(Double.parseDouble(source[StoreHeader.latitude.getOrdinal()]), Double.parseDouble(source[StoreHeader.longitude.getOrdinal()])));
+        Point point = new GeometryFactory().createPoint(new Coordinate(Double.parseDouble(source[StoreHeader.longitude.getOrdinal()]), Double.parseDouble(source[StoreHeader.latitude.getOrdinal()])));
         return Store.builder()
                 .storeId(Long.valueOf(source[StoreHeader.ID.getOrdinal()]))
                 .type(Store.storeType.BAKERY)
@@ -62,7 +62,6 @@ public class DataProvider {
                 .modifiedBy("A")
                 .createdBy("A")
                 .build();
-
     }
 
     @RequiredArgsConstructor

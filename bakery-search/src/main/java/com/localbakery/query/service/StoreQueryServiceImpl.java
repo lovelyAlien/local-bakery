@@ -1,8 +1,8 @@
 package com.localbakery.query.service;
 
 import com.localbakery.domain.entity.Store;
-import com.localbakery.query.model.StoreBo;
 import com.localbakery.domain.repository.StoreRepository;
+import com.localbakery.query.model.StoreBo;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.locationtech.jts.geom.Coordinate;
@@ -24,11 +24,11 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     private final StoreRepository storeRepository;
 
     @Override
-    public Slice<StoreBo> findAllByLocationNear(Double latitude, Double longitude) {
+    public Slice<StoreBo> findAllByLocationNear(Double longitude, Double latitude) {
         GeometryFactory geometryFactory = new GeometryFactory();
-        Point point = geometryFactory.createPoint(new Coordinate(latitude, longitude));
+        Point point = geometryFactory.createPoint(new Coordinate(longitude, latitude));
         Pageable pageable = Pageable.ofSize(10);
-        Slice<Store> storeSlice = storeRepository.findAllByLocationNear(point, pageable);
+        Slice<Store> storeSlice = storeRepository.findAllByLocationIsNear(point, pageable);
         List<StoreBo> storeBoList = CollectionUtils.emptyIfNull(storeSlice.getContent()).stream()
                 .filter(Objects::nonNull)
                 .map(StoreBo.FROM)

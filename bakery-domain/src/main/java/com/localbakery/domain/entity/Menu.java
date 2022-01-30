@@ -15,7 +15,7 @@ public class Menu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_menu_id")
+    @Column(name = "storeMenuId")
     private Long storeMenuId;
 
     @Column(name = "storeId")

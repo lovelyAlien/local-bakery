@@ -17,7 +17,9 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public SearchResponseVo search(SearchRequestVo searchRequest) {
         StoreSearchRequest storeSearchRequest = StoreSearchRequest.builder()
-                        .build();
+                .latitude(searchRequest.getLatitude())
+                .longitude(searchRequest.getLongitude())
+                .build();
         StoreSearchResponse response = storeSearchService.search(storeSearchRequest);
         return SearchResponseVo.builder()
                 .build();

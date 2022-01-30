@@ -7,6 +7,6 @@ import lombok.Getter;
 @Getter
 public class StoreSearchRequest {
 
-    private Double latitude;
     private Double longitude;
+    private Double latitude;
 }
