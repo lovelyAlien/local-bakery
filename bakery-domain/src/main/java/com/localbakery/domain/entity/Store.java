@@ -66,7 +66,7 @@ public class Store {
     private LocalDateTime createdAt;
 
 
-    enum storeType {
+    public enum storeType {
         BAKERY
     }
 }

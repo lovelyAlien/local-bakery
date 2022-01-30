@@ -24,9 +24,9 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     private final StoreRepository storeRepository;
 
     @Override
-    public Slice<StoreBo> findAllByLocationNear(Double altitude, Double longitude) {
+    public Slice<StoreBo> findAllByLocationNear(Double latitude, Double longitude) {
         GeometryFactory geometryFactory = new GeometryFactory();
-        Point point = geometryFactory.createPoint(new Coordinate(altitude, longitude));
+        Point point = geometryFactory.createPoint(new Coordinate(latitude, longitude));
         Pageable pageable = Pageable.ofSize(10);
         Slice<Store> storeSlice = storeRepository.findAllByLocationNear(point, pageable);
         List<StoreBo> storeBoList = CollectionUtils.emptyIfNull(storeSlice.getContent()).stream()
