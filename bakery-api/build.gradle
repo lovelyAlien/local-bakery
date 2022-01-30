@@ -21,7 +21,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
-    implementation project(':bakery-search-service')
+    implementation project(':bakery-search')
     implementation project(':bakery-domain')
 
 
