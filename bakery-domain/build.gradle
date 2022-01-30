@@ -11,14 +11,14 @@ repositories {
 }
 
 ext {
-    springVersion='2.6.2'
+    springBootVersion='2.6.2'
     lombokVersion='1.18.22'
     junitVersion='5.8.1'
 }
 
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     implementation "org.hibernate:hibernate-spatial:5.6.2.Final"
 
     compileOnly "org.projectlombok:lombok:${lombokVersion}"

@@ -5,6 +5,7 @@ import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,8 +17,12 @@ public class Store {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "storeId")
+    private Long storeId;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "storeId")
+    private List<Menu> menus;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
