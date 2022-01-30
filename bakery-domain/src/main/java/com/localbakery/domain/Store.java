@@ -1,6 +1,7 @@
 package com.localbakery.domain;
 
 import lombok.*;
+import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -34,9 +35,6 @@ public class Store {
     @Column(name = "endTime")
     private Long endTime;
 
-    @Embedded
-    private Coordinate coordinate;
-
     @Column(name = "modifiedBy")
     private String modifiedBy;
 
@@ -49,19 +47,8 @@ public class Store {
     @Column(name = "createdAt", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
-
-    @Embeddable
-    @Getter
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Coordinate {
-        @Column(name = "altitude")
-        private String altitude;
-        @Column(name = "longitude")
-        private String longitude;
-
-    }
+    @Column(name = "location")
+    private Point location;
 
     enum storeType {
         BAKERY
