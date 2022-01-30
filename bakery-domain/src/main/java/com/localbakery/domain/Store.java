@@ -5,6 +5,7 @@ import org.locationtech.jts.geom.Point;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -34,11 +35,11 @@ public class Store {
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
-    @Column(name = "startTime")
-    private Long startTime;
+    @Column(name = "startTime", columnDefinition = "TIME")
+    private LocalTime startTime;
 
-    @Column(name = "endTime")
-    private Long endTime;
+    @Column(name = "endTime", columnDefinition = "TIME")
+    private LocalTime endTime;
 
     @Column(name = "modifiedBy")
     private String modifiedBy;
