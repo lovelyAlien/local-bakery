@@ -18,12 +18,16 @@ public class SearchController {
     private final SearchService searchService;
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
-    public ResponseContainer search(@RequestParam("longitude") Double longitude, @RequestParam("latitude") Double latitude) {
+    public ResponseContainer<SearchResponseVo> search(@RequestParam("longitude") Double longitude, @RequestParam("latitude") Double latitude) {
         SearchResponseVo searchResponseVo = searchService.search(SearchRequestVo.builder()
                 .longitude(longitude)
                 .latitude(latitude)
                 .build());
-        return ResponseContainer.ok("hello");
+        return ResponseContainer.<SearchResponseVo>builder()
+                .rMessage("a")
+                .rCode("a")
+                .rData(searchResponseVo)
+                .build();
 
     }
 }
