@@ -1,11 +1,10 @@
-package com.localbakery.search;
+package com.localbakery;
 
-import com.localbakery.EnableRepository;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@EnableRepository
 @Configuration
-@ComponentScan(basePackages = {"com.localbakery.search.service"})
+@EnableBakeryRepository
+@ComponentScan(value = {"com.localbakery.query", "com.localbakery.search"})
 public class SearchServiceConfig {
 }

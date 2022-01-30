@@ -14,7 +14,6 @@ public class StoreSearchServiceImpl implements StoreSearchService {
 
     private final StoreQueryService storeQueryService;
 
-
     @Override
     public StoreSearchResponse search(StoreSearchRequest request) {
         Slice<StoreBo> storeBoList = storeQueryService.findAllByLocationNear(request.getAltitude(), request.getLongitude());

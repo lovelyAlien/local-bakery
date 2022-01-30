@@ -1,4 +1,5 @@
 rootProject.name = 'localBakery'
 include 'bakery-domain'
 include 'bakery-search-service'
+include 'bakery-api'
 
