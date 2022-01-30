@@ -24,8 +24,12 @@ public class Menu {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "price")
+    private Long price;
+
     @Column(name = "signature", columnDefinition = "TINYINT")
     private Boolean signature;
+
 
     @Column(name = "modifiedBy")
     private String modifiedBy;
