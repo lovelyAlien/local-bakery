@@ -1,6 +1,6 @@
-package com.localbakery.repository;
+package com.localbakery.domain.repository;
 
-import com.localbakery.domain.Store;
+import com.localbakery.domain.entity.Store;
 import org.locationtech.jts.geom.Point;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;

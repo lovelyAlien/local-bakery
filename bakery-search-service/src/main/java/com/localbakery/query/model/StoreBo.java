@@ -1,6 +1,6 @@
 package com.localbakery.query.model;
 
-import com.localbakery.domain.Store;
+import com.localbakery.domain.entity.Store;
 import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;

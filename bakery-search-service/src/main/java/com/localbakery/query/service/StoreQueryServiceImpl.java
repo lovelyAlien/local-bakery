@@ -1,8 +1,8 @@
 package com.localbakery.query.service;
 
-import com.localbakery.domain.Store;
+import com.localbakery.domain.entity.Store;
 import com.localbakery.query.model.StoreBo;
-import com.localbakery.repository.StoreRepository;
+import com.localbakery.domain.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.locationtech.jts.geom.Coordinate;

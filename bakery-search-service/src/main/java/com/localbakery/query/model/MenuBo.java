@@ -1,6 +1,6 @@
 package com.localbakery.query.model;
 
-import com.localbakery.domain.Menu;
+import com.localbakery.domain.entity.Menu;
 import lombok.Builder;
 import lombok.Getter;
 

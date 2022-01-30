@@ -1,4 +1,4 @@
-package com.localbakery.domain;
+package com.localbakery.domain.entity;
 
 import lombok.*;
 
