@@ -32,6 +32,15 @@ public class Store {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "homePageUrl")
+    private String homePageUrl;
+
+    @Column(name = "thumbnailImageUrl")
+    private String thumbnailImageUrl;
+
     @Column(name = "phoneNumber")
     private String phoneNumber;
 
@@ -40,6 +49,9 @@ public class Store {
 
     @Column(name = "endTime", columnDefinition = "TIME")
     private LocalTime endTime;
+
+    @Column(name = "location")
+    private Point location;
 
     @Column(name = "modifiedBy")
     private String modifiedBy;
@@ -53,8 +65,6 @@ public class Store {
     @Column(name = "createdAt", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @Column(name = "location")
-    private Point location;
 
     enum storeType {
         BAKERY
