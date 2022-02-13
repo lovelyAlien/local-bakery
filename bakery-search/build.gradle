@@ -10,7 +10,7 @@ repositories {
 }
 
 ext {
-    springBootVersion='2.6.2'
+    springBootVersion='2.6.0'
     springVersion='5.3.15'
     lombokVersion='1.18.22'
     junitVersion='5.8.1'

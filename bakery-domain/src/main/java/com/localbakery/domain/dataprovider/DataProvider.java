@@ -11,20 +11,23 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 @Component
 @RequiredArgsConstructor
 @Slf4j
 public class DataProvider {
-    private static final String STORE_FILE = "/data/breadstore_202201301137.csv";
+    private static final String STORE_FILE = "classpath:/data/breadstore_202201301137.csv";
     private static final String MENU_FILE = "classpath:data/completebreadmenu.csv";
 
     private final StoreRepository storeRepository;
+    private final ResourceLoader resourceLoader;
 
     @PostConstruct
     public void init() throws CsvValidationException, IOException {
@@ -33,8 +36,8 @@ public class DataProvider {
     }
 
     private void fillStore() throws IOException, CsvValidationException {
-        FileReader fileReader = new FileReader(new ClassPathResource(STORE_FILE).getFile());
-        CSVReader csvReader = new CSVReader(fileReader);
+        InputStreamReader isr = new InputStreamReader(resourceLoader.getResource(STORE_FILE).getInputStream());
+        CSVReader csvReader = new CSVReader(isr);
         csvReader.readNext(); // skip headers
         log.info("started to add store datas");
         while (csvReader.iterator().hasNext()) {

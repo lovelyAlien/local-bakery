@@ -5,10 +5,7 @@ import com.localbakery.api.search.model.SearchRequestVo;
 import com.localbakery.api.search.model.SearchResponseVo;
 import com.localbakery.api.search.service.SearchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -24,8 +21,8 @@ public class SearchController {
                 .latitude(latitude)
                 .build());
         return ResponseContainer.<SearchResponseVo>builder()
-                .rMessage("a")
-                .rCode("a")
+                .rMessage("OK")
+                .rCode("200")
                 .rData(searchResponseVo)
                 .build();
 
