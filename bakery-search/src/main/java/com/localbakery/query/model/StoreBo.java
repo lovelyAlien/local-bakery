@@ -1,6 +1,7 @@
 package com.localbakery.query.model;
 
 import com.localbakery.domain.entity.Store;
+import com.localbakery.domain.model.Coordinate;
 import lombok.Builder;
 import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
@@ -21,7 +22,7 @@ public class StoreBo {
     private String phoneNumber;
     private LocalTime startTime;
     private LocalTime endTime;
-    private Point location;
+    private Coordinate coordinate;
 
     public boolean isOpen() {
         if (startTime == null || null == endTime) {
@@ -41,7 +42,10 @@ public class StoreBo {
                 .phoneNumber(source.getPhoneNumber())
                 .startTime(source.getStartTime())
                 .endTime(source.getEndTime())
-                .location(source.getLocation())
+                .coordinate(Coordinate.builder()
+                        .longitude(source.getLocation().getX())
+                        .latitude(source.getLocation().getY())
+                        .build())
                 .menus(CollectionUtils.emptyIfNull(source.getMenus())
                         .stream()
                         .map(MenuBo.FROM)

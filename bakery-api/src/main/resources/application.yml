@@ -1,9 +1,12 @@
 spring:
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://127.0.0.1:3306/localbakery
-    username: root
-    password: 1234
+    url: jdbc:mariadb://breaddb.cgs0x9l89dua.ap-northeast-2.rds.amazonaws.com:3306/localbakery
+    #url: jdbc:mariadb://127.0.0.1:3306/localbakery
+    username: admin
+    password: helloworld
+    #username: root
+    #password: 1234
   jpa:
     properties:
       hibernate:

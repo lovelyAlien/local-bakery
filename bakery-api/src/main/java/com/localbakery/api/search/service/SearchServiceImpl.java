@@ -22,6 +22,7 @@ public class SearchServiceImpl implements SearchService {
                 .build();
         StoreSearchResponse response = storeSearchService.search(storeSearchRequest);
         return SearchResponseVo.builder()
+                .stores(response.getStores())
                 .build();
     }
 

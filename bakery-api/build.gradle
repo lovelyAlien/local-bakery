@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
 }
 
 group 'com.example'
@@ -11,16 +13,27 @@ repositories {
 
 
 ext {
-    springBootVersion='2.6.2'
+    springBootVersion='2.6.0'
     springVersion='5.3.15'
     lombokVersion='1.18.22'
     junitVersion='5.8.1'
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'com.localbakery.api.BakeryApiApplication'
+        )
+    }
 }
 
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
     implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.3'
+    implementation 'com.bedatadriven:jackson-datatype-jts:2.4'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.13.1'
     implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
     implementation project(':bakery-search')
     implementation project(':bakery-domain')
