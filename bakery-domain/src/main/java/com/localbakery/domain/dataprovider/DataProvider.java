@@ -1,6 +1,8 @@
 package com.localbakery.domain.dataprovider;
 
+import com.localbakery.domain.entity.Menu;
 import com.localbakery.domain.entity.Store;
+import com.localbakery.domain.repository.MenuRepository;
 import com.localbakery.domain.repository.StoreRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
@@ -26,6 +28,7 @@ public class DataProvider {
     private static final String STORE_FILE = "classpath:/data/breadstore_202201301137.csv";
     private static final String MENU_FILE = "classpath:data/completebreadmenu.csv";
 
+    private final MenuRepository menuRepository;
     private final StoreRepository storeRepository;
     private final ResourceLoader resourceLoader;
 
@@ -33,6 +36,19 @@ public class DataProvider {
     public void init() throws CsvValidationException, IOException {
         fillStore();
 
+    }
+    private void fillMenu() throws IOException, CsvValidationException {
+        InputStreamReader isr = new InputStreamReader(resourceLoader.getResource(MENU_FILE).getInputStream());
+        CSVReader csvReader = new CSVReader(isr);
+        csvReader.readNext(); // skip headers
+        log.info("started to add menu datas");
+        while (csvReader.iterator().hasNext()) {
+            Menu menu = assembleMenu(csvReader.readNext());
+            if (menu != null) {
+                menuRepository.save(menu);
+            }
+        }
+        log.info("finished. adding menu datas");
     }
 
     private void fillStore() throws IOException, CsvValidationException {
@@ -47,6 +63,19 @@ public class DataProvider {
             }
         }
         log.info("finished. adding store datas");
+    }
+
+    private Menu assembleMenu(String[] source) {
+        if (source == null)
+            return null;
+        return Menu.builder()
+                .storeMenuId(Long.valueOf(source[MenuHeader.STORE_MENU_ID.getOrdinal()]))
+                .storeId(Long.valueOf(source[MenuHeader.STORE_ID.getOrdinal()]))
+                .name(source[MenuHeader.NAME.getOrdinal()])
+                .price(Long.valueOf(source[MenuHeader.PRICE.getOrdinal()]))
+                .modifiedBy("A")
+                .createdBy("A")
+                .build();
     }
 
     private Store assembleStore(String[] source) {
@@ -87,6 +116,17 @@ public class DataProvider {
         BUSINESS_HOURS(14),
         NAVER_PLACE_MENU(15),
         NAVER_THUMB_URL(16),
+        ;
+        private final int ordinal;
+    }
+
+    @RequiredArgsConstructor
+    @Getter
+    enum MenuHeader {
+        STORE_MENU_ID(1),
+        STORE_ID(2),
+        NAME(3),
+        PRICE(4),
         ;
         private final int ordinal;
     }
