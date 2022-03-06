@@ -15,16 +15,17 @@ public class SearchController {
     private final SearchService searchService;
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
-    public ResponseContainer<SearchResponseVo> search(@RequestParam("longitude") Double longitude, @RequestParam("latitude") Double latitude) {
+    public ResponseContainer<SearchResponseVo> search(@RequestParam("longitude") Double longitude, @RequestParam("latitude") Double latitude, @RequestParam("longitude2") Double longitude2, @RequestParam("latitude2") Double latitude2) {
         SearchResponseVo searchResponseVo = searchService.search(SearchRequestVo.builder()
                 .longitude(longitude)
                 .latitude(latitude)
+                .longitude2(longitude2)
+                .latitude2(latitude2)
                 .build());
         return ResponseContainer.<SearchResponseVo>builder()
                 .rMessage("OK")
                 .rCode("200")
                 .rData(searchResponseVo)
                 .build();
-
     }
 }

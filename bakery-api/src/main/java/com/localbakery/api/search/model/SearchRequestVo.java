@@ -8,4 +8,6 @@ import lombok.Getter;
 public class SearchRequestVo {
     private Double longitude;
     private Double latitude;
+    private Double longitude2;
+    private Double latitude2;
 }

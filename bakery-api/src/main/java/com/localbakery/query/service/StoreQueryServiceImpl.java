@@ -24,11 +24,21 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     private final StoreRepository storeRepository;
 
     @Override
-    public Slice<StoreBo> findAllByLocationNear(Double longitude, Double latitude) {
+    public Slice<StoreBo> findAllByLocationNear(Double longitude, Double latitude, Double longitude2, Double latitude2) {
         GeometryFactory geometryFactory = new GeometryFactory();
         Point point = geometryFactory.createPoint(new Coordinate(longitude, latitude));
+        Point point2 = geometryFactory.createPoint(new Coordinate(longitude2, latitude2));
         Pageable pageable = Pageable.ofSize(10);
-        Slice<Store> storeSlice = storeRepository.findAllByLocationIsNear(point, pageable);
+
+        if (longitude > longitude2) {
+            Double temp = longitude;
+            longitude = longitude2;
+            longitude2 = temp;
+            temp = latitude;
+            latitude = latitude2;
+            latitude2 = temp;
+        }
+        Slice<Store> storeSlice = storeRepository.findAllByLocationIsNear(longitude, latitude, longitude2, latitude2, pageable);
         List<StoreBo> storeBoList = CollectionUtils.emptyIfNull(storeSlice.getContent()).stream()
                 .filter(Objects::nonNull)
                 .map(StoreBo.FROM)

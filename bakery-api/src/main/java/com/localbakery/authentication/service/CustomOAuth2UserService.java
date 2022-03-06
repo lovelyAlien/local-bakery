@@ -1,12 +1,10 @@
 package com.localbakery.authentication.service;
 
 import com.localbakery.authentication.domain.Account;
-import com.localbakery.authentication.oauth2.OAuth2AuthenticationProcessingException;
 import com.localbakery.authentication.oauth2.OAuth2UserInfo;
 import com.localbakery.authentication.oauth2.OAuth2UserInfoFactory;
 import com.localbakery.authentication.oauth2.UserPrincipal;
 import lombok.RequiredArgsConstructor;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
@@ -16,9 +14,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
-import java.security.AuthProvider;
 import java.util.Optional;
 
 @RequiredArgsConstructor

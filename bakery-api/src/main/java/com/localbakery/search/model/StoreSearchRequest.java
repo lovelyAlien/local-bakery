@@ -5,8 +5,10 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class StoreSearchRequest {
+public class  StoreSearchRequest {
 
     private Double longitude;
     private Double latitude;
+    private Double longitude2;
+    private Double latitude2;
 }

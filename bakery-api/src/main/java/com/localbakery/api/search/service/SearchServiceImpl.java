@@ -19,6 +19,8 @@ public class SearchServiceImpl implements SearchService {
         StoreSearchRequest storeSearchRequest = StoreSearchRequest.builder()
                 .latitude(searchRequest.getLatitude())
                 .longitude(searchRequest.getLongitude())
+                .latitude2(searchRequest.getLatitude2())
+                .longitude2(searchRequest.getLongitude2())
                 .build();
         StoreSearchResponse response = storeSearchService.search(storeSearchRequest);
         return SearchResponseVo.builder()
