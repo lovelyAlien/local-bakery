@@ -63,6 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable() //로그인폼 비활성화
                 .httpBasic().disable() //기본 로그인 창 비활성화
                 .authorizeRequests()
+                    .antMatchers("/swagger.html/**").permitAll()
+                    .antMatchers("/v2/**").permitAll()
                     .antMatchers("/").permitAll()
                     .antMatchers("/auth/**", "oauth2/**").permitAll()
                     .anyRequest().authenticated()
@@ -102,6 +104,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
+                .antMatchers("/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**")
                 .mvcMatchers("/node_modules/**")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
