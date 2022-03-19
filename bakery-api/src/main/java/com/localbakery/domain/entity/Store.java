@@ -39,7 +39,7 @@ public class Store {
     @JoinColumn(name = "storeId")
     private List<Menu> menus;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "storeId")
     private List<Review> reviews;
 

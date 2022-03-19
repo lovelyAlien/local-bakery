@@ -1,6 +1,9 @@
 package com.localbakery.domain.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -10,6 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "reviews")
 public class Review {
 
@@ -24,18 +28,25 @@ public class Review {
     @Column(name = "reviewerId")
     private Long reviewerId;
 
+    @Column(name = "reviewerEmail")
+    private String reviewerEmail;
+
     @Column(name = "contents")
     private String contents;
 
-    @Column(name = "reviewerName")
-    private String reviewerName;
+
+
+    @Column(name= "rating")
+    private Integer rating;
 
 //    @Column(name = "images")
 //    private Long images;
 
+    @CreatedDate
     @Column(name = "modifiedAt", columnDefinition = "TIMESTAMP")
     private LocalDateTime modifiedAt;
 
+    @LastModifiedDate
     @Column(name = "createdAt", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
 }
