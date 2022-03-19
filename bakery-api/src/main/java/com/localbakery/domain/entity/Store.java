@@ -39,6 +39,10 @@ public class Store {
     @JoinColumn(name = "storeId")
     private List<Menu> menus;
 
+    @OneToMany
+    @JoinColumn(name = "storeId")
+    private List<Review> reviews;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private storeType type;
