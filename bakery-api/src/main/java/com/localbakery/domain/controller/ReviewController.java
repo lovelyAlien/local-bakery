@@ -19,7 +19,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @RequestMapping(value = "reviews", method = RequestMethod.POST)
+    @RequestMapping(value = "reviews/review", method = RequestMethod.POST)
     public ResponseContainer<Long> write(@AuthenticationPrincipal UserPrincipal userPrincipal,  @RequestParam("storeId") Long storeId , @RequestParam("storeName") String storeName, @RequestParam("rating") int rating, @RequestParam("contents") String contents) {
 
         Long reviewId= reviewService.write(userPrincipal, ReviewRequestVo.builder()
@@ -37,5 +37,26 @@ public class ReviewController {
 
     }
 
+
+    @RequestMapping(value ="reviews/review/{id}", method = RequestMethod.PUT)
+    public ResponseContainer<Long> modify(@PathVariable Long id, String contents){
+        Long reviewId=reviewService.modify(id, contents);
+
+        return ResponseContainer.<Long>builder()
+                .rMessage("OK")
+                .rCode("200")
+                .rData(reviewId)
+                .build();
+    }
+
+    @RequestMapping(value ="reviews/review/{id}", method = RequestMethod.DELETE)
+    public ResponseContainer<Void> delete(@PathVariable Long id){
+        reviewService.delete(id);
+
+        return ResponseContainer.<Void>builder()
+                .rMessage("OK")
+                .rCode("200")
+                .build();
+    }
 
 }

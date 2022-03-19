@@ -49,4 +49,9 @@ public class Review {
     @LastModifiedDate
     @Column(name = "createdAt", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
+
+
+    public void setContents(String contents) {
+        this.contents = contents;
+    }
 }

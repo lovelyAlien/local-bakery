@@ -6,4 +6,8 @@ import com.localbakery.domain.model.ReviewResponseVo;
 
 public interface ReviewService {
     Long write(UserPrincipal userPrincipal, ReviewRequestVo reviewRequestVo);
+
+    Long modify(Long reviewId, String contents);
+
+    void delete(Long reviewId);
 }

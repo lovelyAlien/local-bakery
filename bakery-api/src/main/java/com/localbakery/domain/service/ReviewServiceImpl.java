@@ -9,6 +9,8 @@ import com.localbakery.domain.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements  ReviewService{
@@ -27,4 +29,25 @@ public class ReviewServiceImpl implements  ReviewService{
 
         return review.getReviewId();
     }
+
+    @Override
+    public Long modify(Long reviewId, String contents){
+
+        Review review=reviewRepository.findById(reviewId).get();
+
+        review.setContents(contents);
+
+        reviewRepository.save(review);
+
+        return review.getReviewId();
+
+    }
+
+    @Override
+    public void delete(Long reviewId) {
+        Review review=reviewRepository.findById(reviewId).get();
+        reviewRepository.delete(review);
+    }
+
+
 }
