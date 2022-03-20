@@ -27,5 +27,4 @@ public class SearchServiceImpl implements SearchService {
                 .stores(response.getStores())
                 .build();
     }
-
 }
