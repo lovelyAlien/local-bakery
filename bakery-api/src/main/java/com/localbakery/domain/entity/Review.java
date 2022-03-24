@@ -22,8 +22,9 @@ public class Review {
     @Column(name = "reviewId")
     private Long reviewId;
 
-    @Column(name = "storeId")
-    private Long storeId;
+    @ManyToOne
+    @JoinColumn(name="storeId")
+    private Store store;
 
     @Column(name = "reviewerId")
     private Long reviewerId;
@@ -37,7 +38,7 @@ public class Review {
 
 
     @Column(name= "rating")
-    private Integer rating;
+    private float rating;
 
 //    @Column(name = "images")
 //    private Long images;

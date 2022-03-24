@@ -11,7 +11,7 @@ public class ReviewRequestVo {
 
     private String storeName;
 
-    private int rating;
+    private float rating;
 
     private String contents;
 
