@@ -30,15 +30,13 @@ public class StoreQueryServiceImpl implements StoreQueryService{
         Point point2 = geometryFactory.createPoint(new Coordinate(longitude2, latitude2));
         Pageable pageable = Pageable.ofSize(10);
 
-        if (longitude > longitude2) {
-            Double temp = longitude;
-            longitude = longitude2;
-            longitude2 = temp;
-            temp = latitude;
-            latitude = latitude2;
-            latitude2 = temp;
+        if (point.getX() > point2.getX()) {
+            Point temp = point;
+            point = point2;
+            point2 = temp;
         }
-        Slice<Store> storeSlice = storeRepository.findAllByLocationIsNear(longitude, latitude, longitude2, latitude2, pageable);
+
+        Slice<Store> storeSlice = storeRepository.findAllByLocationIsNear(point.getX(), point.getY(), point2.getX(), point2.getY(), pageable);
         List<StoreBo> storeBoList = CollectionUtils.emptyIfNull(storeSlice.getContent()).stream()
                 .filter(Objects::nonNull)
                 .map(StoreBo.FROM)

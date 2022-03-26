@@ -33,6 +33,7 @@ public class DataProvider {
 
     @PostConstruct
     public void init() throws CsvException, IOException {
+
     }
 
     private void fillMenu() throws IOException, CsvException {
