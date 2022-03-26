@@ -40,8 +40,8 @@ public class Store {
     @JoinColumn(name = "storeId")
     private List<Menu> menus;
 
-    @OneToMany(mappedBy = "store")
-    private List<Review> reviews=new ArrayList<>();
+//    @OneToMany(mappedBy = "store")
+//    private List<Review> reviews=new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")

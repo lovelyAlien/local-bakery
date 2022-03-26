@@ -47,3 +47,12 @@ CREATE TABLE IF NOT EXISTS localbakery.reviews
     modifiedAt        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdAt         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = INNODB;
+
+# DROP TABLE IF EXISTS localbakery.accounts;
+# CREATE TABLE IF NOT EXISTS localbakery.accounts
+# (
+#     id           INT AUTO_INCREMENT PRIMARY KEY,
+#     email VARCHAR(255),
+#     user_name VARCHAR(255)
+#
+# ) ENGINE = INNODB;

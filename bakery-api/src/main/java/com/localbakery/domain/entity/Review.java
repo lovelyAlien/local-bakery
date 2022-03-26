@@ -35,7 +35,9 @@ public class Review {
     @Column(name = "contents")
     private String contents;
 
+    private String specials;
 
+    private String recommands;
 
     @Column(name= "rating")
     private float rating;
