@@ -42,8 +42,10 @@ CREATE TABLE IF NOT EXISTS localbakery.reviews
     storeId INT NOT NULL,
     reviewerId INT NOT NULL,
     reviewerEmail VARCHAR(255),
-    contents VARCHAR(255),
+    contents VARCHAR(1024),
     ratings FLOAT NOT NULL DEFAULT 0,
+    specials VARCHAR(255),
+    recommends VARCHAR(255),
     modifiedAt        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdAt         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = INNODB;

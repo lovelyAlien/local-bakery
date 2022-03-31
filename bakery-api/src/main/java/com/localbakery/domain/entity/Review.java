@@ -41,8 +41,8 @@ public class Review {
     @Column(name = "specials")
     private String specials;
 
-    @Column(name = "recommands")
-    private String recommands;
+    @Column(name = "recommends")
+    private String recommends;
 
     @Column(name= "rating")
     private float rating;

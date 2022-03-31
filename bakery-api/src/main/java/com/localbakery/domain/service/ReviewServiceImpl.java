@@ -32,6 +32,8 @@ public class ReviewServiceImpl implements ReviewService {
                         .reviewerEmail(userPrincipal.getEmail())
                         .contents(reviewRequestVo.getContents())
                         .rating(reviewRequestVo.getRating())
+                        .specials(reviewRequestVo.getSpecials())
+                        .recommends(reviewRequestVo.getRecommends())
                         .build());
 
         return review.getReviewId();
