@@ -23,16 +23,13 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+
+
     @RequestMapping(value = "reviews/review", method = RequestMethod.POST)
-    public ResponseContainer<Long> write(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestParam("storeId") Long storeId, @RequestParam("storeName") String storeName, @RequestParam("rating") int rating, @RequestParam("contents") String contents) {
+    public ResponseContainer<Long> write(@AuthenticationPrincipal UserPrincipal userPrincipal,@RequestBody ReviewRequestVo reviewRequestVo) {
 
-        Long reviewId = reviewService.write(userPrincipal, ReviewRequestVo.builder()
-                .storeId(storeId)
-                .storeName(storeName)
-                .rating(rating)
-                .contents(contents)
-                .build());
 
+        Long reviewId= reviewService.write(userPrincipal, reviewRequestVo);
         return ResponseContainer.<Long>builder()
                 .rMessage("OK")
                 .rCode("200")
