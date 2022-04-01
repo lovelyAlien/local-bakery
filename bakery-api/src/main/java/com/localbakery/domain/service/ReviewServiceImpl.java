@@ -53,9 +53,10 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void delete(Long reviewId) {
+    public Long delete(Long reviewId) {
         Review review = reviewRepository.findById(reviewId).get();
         reviewRepository.delete(review);
+        return reviewId;
     }
 
     @Override

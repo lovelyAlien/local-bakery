@@ -39,7 +39,7 @@ public class ReviewController {
     }
 
 
-    @RequestMapping(value = "reviews/review/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "reviews/{id}", method = RequestMethod.PUT)
     public ResponseContainer<Long> modify(@PathVariable Long id, @RequestBody ReviewRequestVo reviewRequestVo) {
 
         Long reviewId = reviewService.modify(id, reviewRequestVo);
@@ -50,17 +50,18 @@ public class ReviewController {
                 .build();
     }
 
-    @RequestMapping(value = "reviews/review/{id}", method = RequestMethod.DELETE)
-    public ResponseContainer<Void> delete(@PathVariable Long id) {
-        reviewService.delete(id);
+    @RequestMapping(value = "reviews/{id}", method = RequestMethod.DELETE)
+    public ResponseContainer<Long> delete(@PathVariable Long id) {
+        Long reviewId= reviewService.delete(id);
 
-        return ResponseContainer.<Void>builder()
+        return ResponseContainer.<Long>builder()
                 .rMessage("OK")
                 .rCode("200")
+                .rData(reviewId)
                 .build();
     }
 
-    @RequestMapping(value = "stores/{id}/reviews", method = RequestMethod.POST)
+    @RequestMapping(value = "stores/{id}/reviews", method = RequestMethod.GET)
     public ResponseContainer<List<Review>> findAll(@PathVariable Long id) {
 
         List<Review> reviews= reviewService.findAll(id);
@@ -72,7 +73,7 @@ public class ReviewController {
                 .build();
     }
 
-    @RequestMapping(value= "stores/{storeId}/reviews/{id}", method = RequestMethod.POST)
+    @RequestMapping(value= "stores/{storeId}/reviews/{id}", method = RequestMethod.GET)
     public ResponseContainer<Review> findOne(@PathVariable Long id){
 
         Review review= reviewService.findOne(id);

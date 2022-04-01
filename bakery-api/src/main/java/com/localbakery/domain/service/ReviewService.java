@@ -12,7 +12,7 @@ public interface ReviewService {
 
     Long modify(Long reviewId, ReviewRequestVo reviewRequestVo);
 
-    void delete(Long reviewId);
+    Long delete(Long reviewId);
 
     List<Review> findAll(Long storeId);
 
