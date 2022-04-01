@@ -40,9 +40,9 @@ public class ReviewController {
 
 
     @RequestMapping(value = "reviews/review/{id}", method = RequestMethod.PUT)
-    public ResponseContainer<Long> modify(@PathVariable Long id, String contents) {
-        Long reviewId = reviewService.modify(id, contents);
+    public ResponseContainer<Long> modify(@PathVariable Long id, @RequestBody ReviewRequestVo reviewRequestVo) {
 
+        Long reviewId = reviewService.modify(id, reviewRequestVo);
         return ResponseContainer.<Long>builder()
                 .rMessage("OK")
                 .rCode("200")

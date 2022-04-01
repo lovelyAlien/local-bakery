@@ -1,5 +1,6 @@
 package com.localbakery.domain.entity;
 
+import com.localbakery.domain.model.ReviewRequestVo;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -59,7 +60,10 @@ public class Review {
     private LocalDateTime createdAt;
 
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void update(ReviewRequestVo reviewRequestVo) {
+        this.rating= reviewRequestVo.getRating();
+        this.contents=reviewRequestVo.getContents();
+        this.specials=reviewRequestVo.getSpecials();
+        this.recommends=reviewRequestVo.getRecommends();
     }
 }

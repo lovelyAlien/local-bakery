@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReviewService {
     Long write(UserPrincipal userPrincipal, ReviewRequestVo reviewRequestVo);
 
-    Long modify(Long reviewId, String contents);
+    Long modify(Long reviewId, ReviewRequestVo reviewRequestVo);
 
     void delete(Long reviewId);
 

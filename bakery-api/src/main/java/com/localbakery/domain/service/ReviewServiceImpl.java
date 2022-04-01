@@ -40,11 +40,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Long modify(Long reviewId, String contents) {
+    public Long modify(Long reviewId, ReviewRequestVo reviewRequestVo) {
 
         Review review = reviewRepository.findById(reviewId).get();
 
-        review.setContents(contents);
+        review.update(reviewRequestVo);
 
         reviewRepository.save(review);
 
