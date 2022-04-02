@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -60,16 +61,22 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> findAll(Long storeId) {
+    public List<ReviewResponseVo> findAll(Long storeId) {
 
-        return reviewRepository.findAllByStoreId(storeId);
+//        return reviewRepository.findAllByStoreId(storeId);
+        List<Review> reviews = reviewRepository.findAllByStoreId(storeId);
+        return reviews.stream()
+                .map(review -> new ReviewResponseVo(review))
+                .collect(Collectors.toList());
+
 
     }
 
     @Override
-    public Review findOne(Long reviewId) {
+    public ReviewResponseVo findOne(Long reviewId) {
 
-        return reviewRepository.findById(reviewId).get();
+        Review review= reviewRepository.findById(reviewId).get();
+        return new ReviewResponseVo(review);
 
     }
 

@@ -1,6 +1,8 @@
 package com.localbakery.domain.model;
 
 import com.localbakery.domain.entity.Review;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -13,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+
+@NoArgsConstructor
+@Getter
 public class ReviewResponseVo {
 
     private Long reviewId;

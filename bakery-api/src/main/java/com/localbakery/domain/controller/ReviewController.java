@@ -62,11 +62,11 @@ public class ReviewController {
     }
 
     @RequestMapping(value = "stores/{id}/reviews", method = RequestMethod.GET)
-    public ResponseContainer<List<Review>> findAll(@PathVariable Long id) {
+    public ResponseContainer<List<ReviewResponseVo>> findAll(@PathVariable Long id) {
 
-        List<Review> reviews= reviewService.findAll(id);
+        List<ReviewResponseVo> reviews= reviewService.findAll(id);
 
-        return ResponseContainer.<List<Review>> builder()
+        return ResponseContainer.<List<ReviewResponseVo>> builder()
                 .rMessage("OK")
                 .rCode("200")
                 .rData(reviews)
@@ -74,11 +74,11 @@ public class ReviewController {
     }
 
     @RequestMapping(value= "stores/{storeId}/reviews/{id}", method = RequestMethod.GET)
-    public ResponseContainer<Review> findOne(@PathVariable Long id){
+    public ResponseContainer<ReviewResponseVo> findOne(@PathVariable Long id){
 
-        Review review= reviewService.findOne(id);
+        ReviewResponseVo review= reviewService.findOne(id);
 
-        return ResponseContainer.<Review> builder()
+        return ResponseContainer.<ReviewResponseVo> builder()
                 .rMessage("OK")
                 .rCode("200")
                 .rData(review)
