@@ -1,6 +1,7 @@
 package com.localbakery.authentication.account;
 
 
+
 import com.localbakery.authentication.payload.AuthResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ public class AccountController {
     @GetMapping("/")
     public ResponseEntity<?> login(@RequestParam String token) {
         StringBuilder sb = new StringBuilder();
+
         return ResponseEntity.ok(new AuthResponse(token));
     }
 }

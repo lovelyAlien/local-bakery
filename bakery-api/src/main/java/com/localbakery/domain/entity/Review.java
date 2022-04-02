@@ -1,5 +1,6 @@
 package com.localbakery.domain.entity;
 
+import com.localbakery.domain.model.ReviewRequestVo;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -22,7 +23,11 @@ public class Review {
     @Column(name = "reviewId")
     private Long reviewId;
 
-    @Column(name = "storeId")
+//    @ManyToOne
+//    @JoinColumn(name="storeId")
+//    private Store store;
+
+    @Column(name= "storeId")
     private Long storeId;
 
     @Column(name = "reviewerId")
@@ -34,10 +39,14 @@ public class Review {
     @Column(name = "contents")
     private String contents;
 
+    @Column(name = "specials")
+    private String specials;
 
+    @Column(name = "recommends")
+    private String recommends;
 
     @Column(name= "rating")
-    private Integer rating;
+    private float rating;
 
 //    @Column(name = "images")
 //    private Long images;
@@ -51,7 +60,10 @@ public class Review {
     private LocalDateTime createdAt;
 
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void update(ReviewRequestVo reviewRequestVo) {
+        this.rating= reviewRequestVo.getRating();
+        this.contents=reviewRequestVo.getContents();
+        this.specials=reviewRequestVo.getSpecials();
+        this.recommends=reviewRequestVo.getRecommends();
     }
 }
