@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,9 @@ public class Store {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "storeId")
     private List<Menu> menus;
+
+//    @OneToMany(mappedBy = "store")
+//    private List<Review> reviews=new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
