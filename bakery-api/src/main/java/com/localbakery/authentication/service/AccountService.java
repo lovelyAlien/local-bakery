@@ -1,7 +1,8 @@
 package com.localbakery.authentication.service;
 
-import com.localbakery.authentication.domain.Account;
-import com.localbakery.authentication.mapper.AccountMapper;
+import com.localbakery.account.domain.Account;
+import com.localbakery.account.repository.AccountRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,27 +10,20 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class MapperService {
+@AllArgsConstructor
+public class AccountService {
 
-    public AccountMapper mapper;
-
-    public MapperService(AccountMapper mapper) {
-        this.mapper = mapper;
-    }
-
+    public final AccountRepository accountRepository;
     public Account saveAccount(Account account) {
-
         Account newAccount = new Account(account.getEmail(), account.getUserName());
-        mapper.saveAccount(newAccount);
-
-        return newAccount;
+        return accountRepository.save(newAccount);
     }
 
     public Optional<Account> findByEmail(String email) {
-        return Optional.ofNullable(mapper.findByEmail(email));
+        return Optional.ofNullable(accountRepository.findByEmail(email));
     }
 
     public Optional<Account> findById(Long id) {
-        return Optional.ofNullable(mapper.findById(id));
+        return accountRepository.findById(id);
     }
 }

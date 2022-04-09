@@ -3,6 +3,7 @@ CREATE DATABASE localbakery;
 
 
 DROP TABLE IF EXISTS localbakery.stores;
+
 CREATE TABLE IF NOT EXISTS localbakery.stores
 (
     storeId           INT AUTO_INCREMENT PRIMARY KEY,
@@ -19,6 +20,15 @@ CREATE TABLE IF NOT EXISTS localbakery.stores
     modifiedBy        VARCHAR(255) NOT NULL,
     createdAt         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdBy         VARCHAR(255) NOT NULL
+) ENGINE = INNODB;
+
+DROP TABLE IF EXISTS localbakery.accounts;
+CREATE TABLE iF NOT EXISTS localbakery.accounts
+(
+    accountId INT AUTO_INCREMENT PRIMARY KEY ,
+    email   VARCHAR(255),
+    userName VARCHAR(255),
+    imageUrl VARCHAR(255)
 ) ENGINE = INNODB;
 
 DROP TABLE IF EXISTS localbakery.store_menus;

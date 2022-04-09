@@ -1,4 +1,4 @@
-package com.localbakery.authentication.account;
+package com.localbakery.account.controller;
 
 
 import com.localbakery.authentication.payload.AuthResponse;
@@ -16,7 +16,6 @@ public class AccountController {
     @ApiIgnore
     @GetMapping("/")
     public ResponseEntity<?> login(@RequestParam String token) {
-        StringBuilder sb = new StringBuilder();
         return ResponseEntity.ok(new AuthResponse(token));
     }
 }
