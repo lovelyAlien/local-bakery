@@ -1,6 +1,6 @@
 package com.localbakery.authentication.oauth2;
 
-import com.localbakery.authentication.domain.Account;
+import com.localbakery.account.domain.Account;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

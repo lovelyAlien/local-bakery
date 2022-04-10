@@ -1,10 +1,10 @@
 package com.localbakery.authentication.security;
 
 
-import com.localbakery.authentication.domain.Account;
+import com.localbakery.account.domain.Account;
 import com.localbakery.authentication.exception.ResourceNotFoundException;
 import com.localbakery.authentication.oauth2.UserPrincipal;
-import com.localbakery.authentication.service.MapperService;
+import com.localbakery.authentication.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,13 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    MapperService mapperService;
+    AccountService accountService;
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
-        Account user = mapperService.findByEmail(email)
+        Account user = accountService.findByEmail(email)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with email : " + email)
                 );
@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Transactional
     public UserDetails loadUserById(Long id) {
-        Account user = mapperService.findById(id).orElseThrow(
+        Account user = accountService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("User", "id", id)
         );
 

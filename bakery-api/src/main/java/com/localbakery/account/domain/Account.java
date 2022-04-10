@@ -1,4 +1,4 @@
-package com.localbakery.authentication.domain;
+package com.localbakery.account.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Getter
 @Setter
@@ -14,13 +21,22 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "accounts")
 public class Account {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "accountId")
     private Long id;
 
     private String email;
 
     private String userName;
+
+    private String imageUrl;
+
+    //This might be null
 
     public Account(String email, String userName) {
         this.email = email;
