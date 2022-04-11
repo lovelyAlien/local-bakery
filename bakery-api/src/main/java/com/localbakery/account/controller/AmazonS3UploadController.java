@@ -11,15 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/files")
+@RequestMapping(value = "/api/profileImage")
 @RequiredArgsConstructor
 public class AmazonS3UploadController {
 
     private final S3UploadService s3UploadService;
 
     @PostMapping(value = "/upload")
-    public ResponseEntity<Map<String, String>> uploadFile(String userName, MultipartFile multipartfile) {
+    public ResponseEntity<Map<String, String>> uploadFile(String userEmail, MultipartFile multipartfile) {
 
-        return ResponseEntity.ok(s3UploadService.updateProfileImage(userName, multipartfile));
+        return ResponseEntity.ok(s3UploadService.updateProfileImage(userEmail, multipartfile));
     }
 }

@@ -22,13 +22,13 @@ import java.util.Map;
 @Service
 public class S3UploadService {
 
-    @Value("https://s3-us-east-1.s3.amazonaws.com")
+    @Value("http://localbakery.s3-website.ap-northeast-2.amazonaws.com")
     private String s3BaseUrl;
 
-    @Value("my-test-bucket")
+    @Value("localbakery")
     private String bucketName;
 
-    @Value("/images")
+    @Value("images")
     private String folderName;
 
     private AmazonS3 amazonS3Client;
@@ -43,14 +43,26 @@ public class S3UploadService {
 
 
     @Transactional
-    public Map<String, String> updateProfileImage(String userName, MultipartFile profileImage) {
-        Account user = accountRepository.findByUserName(userName);
+    public Map<String, String> updateProfileImage(String email, MultipartFile profileImage) {
+        Account user = accountRepository.findByEmail(email);
 
-        Map<String, String> result = uploadFileToS3(profileImage);
+        String s3Url = "https://localbakery.s3.amazonaws.com/images/";
 
-        user.setImageUrl(result.get("fileUrl"));
+        Map<String, String> result = new HashMap<>();
 
-        accountRepository.save(user);
+        if (user == null) {
+            result.put("user not found", "null");
+        } else {
+            Map<String, String> filePath = uploadFileToS3(profileImage);
+
+            String imageUrl = s3Url + filePath.get("fileUrl").split("images")[1];
+
+            user.setImageUrl(imageUrl);
+
+            result.put("imageUrl", imageUrl);
+
+            accountRepository.save(user);
+        }
 
         return result;
     }
