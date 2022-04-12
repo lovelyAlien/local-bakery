@@ -43,28 +43,21 @@ public class S3UploadService {
 
 
     @Transactional
-    public Map<String, String> updateProfileImage(String email, MultipartFile profileImage) {
+    public String updateProfileImage(String email, MultipartFile profileImage) {
         Account user = accountRepository.findByEmail(email);
 
         String s3Url = "https://localbakery.s3.amazonaws.com/images/";
 
-        Map<String, String> result = new HashMap<>();
+        Map<String, String> filePath = uploadFileToS3(profileImage);
 
-        if (user == null) {
-            result.put("user not found", "null");
-        } else {
-            Map<String, String> filePath = uploadFileToS3(profileImage);
+        String imageUrl = s3Url + filePath.get("fileUrl").split("images")[1];
 
-            String imageUrl = s3Url + filePath.get("fileUrl").split("images")[1];
+        user.setImageUrl(imageUrl);
 
-            user.setImageUrl(imageUrl);
+        accountRepository.save(user);
 
-            result.put("imageUrl", imageUrl);
+        return imageUrl;
 
-            accountRepository.save(user);
-        }
-
-        return result;
     }
 
     public Map<String, String> uploadFileToS3(MultipartFile multipartfile) {
