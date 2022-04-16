@@ -1,14 +1,18 @@
 package com.localbakery.account.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
+@PropertySource("classpath:aws.properties")
 public class AwsConfig {
 
     private String awsAccessKey;
@@ -33,5 +37,14 @@ public class AwsConfig {
     public AmazonS3 amazonS3Client() {
         return AmazonS3ClientBuilder.standard().withRegion(this.awsRegion).withCredentials(getAwsCredentialsProvider())
                 .build();
+    }
+
+
+    @Bean(name= "aws")
+    public PropertiesFactoryBean propertiesFactoryBean() throws Exception{
+        PropertiesFactoryBean propertiesFactoryBean= new PropertiesFactoryBean();
+        ClassPathResource classPathResource= new ClassPathResource("aws.properties");
+        propertiesFactoryBean.setLocation(classPathResource);
+        return propertiesFactoryBean;
     }
 }
