@@ -41,7 +41,6 @@ public class S3UploadService {
         this.accountRepository = accountRepository;
     }
 
-
     @Transactional
     public String updateProfileImage(String email, MultipartFile profileImage) {
         Account user = accountRepository.findByEmail(email);
@@ -57,7 +56,6 @@ public class S3UploadService {
         accountRepository.save(user);
 
         return imageUrl;
-
     }
 
     public Map<String, String> uploadFileToS3(MultipartFile multipartfile) {
