@@ -19,13 +19,6 @@ public class AmazonS3UploadController {
 
     @PostMapping(value = "/upload")
     public ResponseContainer<String> uploadFile(@RequestParam(value="image") MultipartFile multipartfile) {
-        if (multipartfile == null) {
-            ResponseContainer.<String>builder()
-                    .rMessage("image required")
-                    .rCode("500")
-                    .build();
-        }
-
         return ResponseContainer.<String>builder()
                 .rMessage("OK")
                 .rCode("200")

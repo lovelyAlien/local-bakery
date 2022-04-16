@@ -1,6 +1,6 @@
 package com.localbakery.api.search.service;
 
-import com.localbakery.api.search.model.SearchRequestVo;
+import com.localbakery.api.controller.dto.PointDTO;
 import com.localbakery.api.search.model.SearchResponseVo;
 import com.localbakery.search.model.StoreSearchRequest;
 import com.localbakery.search.model.StoreSearchResponse;
@@ -15,12 +15,12 @@ public class SearchServiceImpl implements SearchService {
     private final StoreSearchService storeSearchService;
 
     @Override
-    public SearchResponseVo search(SearchRequestVo searchRequest) {
+    public SearchResponseVo search(PointDTO searchRequest) {
         StoreSearchRequest storeSearchRequest = StoreSearchRequest.builder()
-                .latitude(searchRequest.getLatitude())
-                .longitude(searchRequest.getLongitude())
-                .latitude2(searchRequest.getLatitude2())
-                .longitude2(searchRequest.getLongitude2())
+                .leftBottomLatitude(searchRequest.getLeftBottomLatitude())
+                .leftBottomLongitude(searchRequest.getLeftBottomLongitude())
+                .rightTopLatitude(searchRequest.getRightTopLatitude())
+                .rightTopLongitude(searchRequest.getRightTopLongitude())
                 .build();
         StoreSearchResponse response = storeSearchService.search(storeSearchRequest);
         return SearchResponseVo.builder()
