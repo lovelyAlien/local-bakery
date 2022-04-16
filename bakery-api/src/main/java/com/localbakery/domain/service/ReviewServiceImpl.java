@@ -11,6 +11,7 @@ import com.localbakery.domain.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,9 +23,11 @@ public class ReviewServiceImpl implements ReviewService {
     private final StoreRepository storeRepository;
 
     @Override
+    @Transactional
     public Long write(UserPrincipal userPrincipal, ReviewRequestVo reviewRequestVo) {
 
-//        Store store = storeRepository.findById(reviewRequestVo.getStoreId()).get();
+        Store store = storeRepository.findById(reviewRequestVo.getStoreId()).get();
+        store.updateRating(reviewRequestVo.getRating());
 
         Review review = reviewRepository.save(
                 Review.builder()

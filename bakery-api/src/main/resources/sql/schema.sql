@@ -10,6 +10,9 @@ CREATE TABLE IF NOT EXISTS localbakery.stores
     type              VARCHAR(255),
     name              VARCHAR(255) NOT NULL,
     address           VARCHAR(255),
+    ratingAverage     FLOAT NOT NULL DEFAULT 0,
+    totalCount        INT,
+    totalRating       FLOAT NOT NULL DEFAULT 0,
     thumbnailImageUrl VARCHAR(1024),
     phoneNumber       VARCHAR(255),
     homePageUrl       VARCHAR(255),
@@ -21,6 +24,8 @@ CREATE TABLE IF NOT EXISTS localbakery.stores
     createdAt         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     createdBy         VARCHAR(255) NOT NULL
 ) ENGINE = INNODB;
+
+
 
 DROP TABLE IF EXISTS localbakery.accounts;
 CREATE TABLE iF NOT EXISTS localbakery.accounts

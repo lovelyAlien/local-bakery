@@ -53,6 +53,15 @@ public class Store {
     @Column(name = "address")
     private String address;
 
+    @Column(name= "ratingAverage")
+    private float ratingAverage;
+
+    @Column(name= "totalCount")
+    private int totalCount;
+
+    @Column(name= "totalRating")
+    private float totalRating;
+
     @Column(name = "homePageUrl")
     private String homePageUrl;
 
@@ -86,5 +95,12 @@ public class Store {
 
     public enum storeType {
         BAKERY
+    }
+
+
+    public void updateRating(float rating){
+        this.totalCount+=1;
+        this.totalRating+=rating;
+        this.ratingAverage=(float)(totalRating/totalCount);
     }
 }
