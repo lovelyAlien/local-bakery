@@ -27,7 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
     public Long write(UserPrincipal userPrincipal, ReviewRequestVo reviewRequestVo) {
 
         Store store = storeRepository.findById(reviewRequestVo.getStoreId()).get();
-        store.updateRating(reviewRequestVo.getRating());
+        store.rating(reviewRequestVo.getRating());
 
         Review review = reviewRepository.save(
                 Review.builder()
@@ -46,7 +46,14 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Long modify(Long reviewId, ReviewRequestVo reviewRequestVo) {
 
+        Store store = storeRepository.findById(reviewRequestVo.getStoreId()).get();
+
         Review review = reviewRepository.findById(reviewId).get();
+
+        float before_rating= review.getRating();
+        float after_rating= reviewRequestVo.getRating();
+
+        store.updateRating(before_rating, after_rating);
 
         review.update(reviewRequestVo);
 
@@ -59,6 +66,10 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public Long delete(Long reviewId) {
         Review review = reviewRepository.findById(reviewId).get();
+
+        Store store = storeRepository.findById(review.getStoreId()).get();
+        store.deleteRating(review.getRating());
+
         reviewRepository.delete(review);
         return reviewId;
     }
