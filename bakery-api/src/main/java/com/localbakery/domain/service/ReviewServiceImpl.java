@@ -80,5 +80,12 @@ public class ReviewServiceImpl implements ReviewService {
 
     }
 
+    @Override
+    public List<Review> findUserReviews(UserPrincipal userPrincipal) {
+
+
+        return reviewRepository.findAllByReviewerId(userPrincipal.getId());
+    }
+
 
 }

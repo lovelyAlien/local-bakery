@@ -17,4 +17,6 @@ public interface ReviewService {
     List<ReviewResponseVo> findAll(Long storeId);
 
     ReviewResponseVo findOne(Long reviewId);
+
+    List<Review> findUserReviews(UserPrincipal userPrincipal);
 }
