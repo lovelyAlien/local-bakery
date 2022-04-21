@@ -1,5 +1,6 @@
 package com.localbakery.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.localbakery.domain.model.ReviewRequestVo;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,7 +30,8 @@ public class Review {
 //    @JoinColumn(name="storeId")
 //    private Store store;
 
-    @OneToMany(mappedBy = "")
+    @OneToMany(mappedBy = "review")
+    @JsonIgnore //JSON 변환시 무한 루프 방지용
     private List<ReviewImage> images=new ArrayList<>();
 
     @Column(name= "storeId")
@@ -70,5 +72,9 @@ public class Review {
         this.contents=reviewRequestVo.getContents();
         this.specials=reviewRequestVo.getSpecials();
         this.recommends=reviewRequestVo.getRecommends();
+    }
+
+    public void setImages(List<ReviewImage> reviewImages){
+        this.images=reviewImages;
     }
 }

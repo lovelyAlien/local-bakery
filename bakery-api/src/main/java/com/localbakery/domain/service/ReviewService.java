@@ -4,11 +4,13 @@ import com.localbakery.authentication.oauth2.UserPrincipal;
 import com.localbakery.domain.entity.Review;
 import com.localbakery.domain.model.ReviewRequestVo;
 import com.localbakery.domain.model.ReviewResponseVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface ReviewService {
-    Long write(UserPrincipal userPrincipal, ReviewRequestVo reviewRequestVo);
+
+    ReviewResponseVo write(List<MultipartFile> files, UserPrincipal userPrincipal, ReviewRequestVo reviewRequestVo);
 
     Long modify(Long reviewId, ReviewRequestVo reviewRequestVo);
 

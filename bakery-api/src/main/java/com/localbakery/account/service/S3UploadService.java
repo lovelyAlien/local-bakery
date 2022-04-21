@@ -41,14 +41,13 @@ public class S3UploadService {
         this.accountRepository = accountRepository;
     }
 
-
     @Transactional
     public Map<String, String> updateProfileImage(String userName, MultipartFile profileImage) {
         Account user = accountRepository.findByUserName(userName);
 
         Map<String, String> result = uploadFileToS3(profileImage);
 
-        user.setImageUrl(result.get("fileUrl"));
+        user.setImageUrl(result.get("imageUrl"));
 
         accountRepository.save(user);
 
@@ -82,7 +81,7 @@ public class S3UploadService {
                 String s3FileAccessUrl = s3BaseUrl.concat(folderName).concat(file.getName())
                         .replaceAll("\\s", "+");
 
-                response.put("fileUrl", s3FileAccessUrl);
+                response.put("imageUrl", s3FileAccessUrl);
 
                 file.delete();
 

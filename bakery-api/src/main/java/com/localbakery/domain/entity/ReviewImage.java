@@ -31,7 +31,7 @@ public class ReviewImage {
 //    private Long reviewId;
 
     @ManyToOne
-    @JoinColumn(name = "review_id", nullable = false)
+    @JoinColumn(name = "reviewId")
     private Review review;
 
     @CreatedDate
@@ -41,5 +41,7 @@ public class ReviewImage {
     @LastModifiedDate
     @Column(name = "createdAt", columnDefinition = "TIMESTAMP")
     private LocalDateTime createdAt;
+
+
 
 }

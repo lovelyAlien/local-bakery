@@ -40,6 +40,7 @@ public class ReviewResponseVo {
 
     private String[] recommends;
 
+    private List<String> imageUrls;
 
     private float rating;
 
@@ -58,6 +59,21 @@ public class ReviewResponseVo {
         contents=review.getContents();
         specials= review.getSpecials().split(",");
         recommends= review.getRecommends().split(",");
+        rating=review.getRating();
+        modifiedAt=review.getModifiedAt();
+        createdAt=review.getCreatedAt();
+
+    }
+
+    public ReviewResponseVo(Review review, List<String> imageUrls){
+        reviewId= review.getReviewId();
+        storeId= review.getStoreId();
+        reviewerId= review.getReviewerId();
+        reviewerEmail= review.getReviewerEmail();
+        contents=review.getContents();
+        specials= review.getSpecials().split(",");
+        recommends= review.getRecommends().split(",");
+        this.imageUrls =imageUrls;
         rating=review.getRating();
         modifiedAt=review.getModifiedAt();
         createdAt=review.getCreatedAt();
