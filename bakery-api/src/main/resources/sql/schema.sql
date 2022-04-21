@@ -73,3 +73,14 @@ CREATE TABLE IF NOT EXISTS localbakery.reviews
 #     user_name VARCHAR(255)
 #
 # ) ENGINE = INNODB;
+
+DROP TABLE IF EXISTS localbakery.images;
+CREATE TABLE IF NOT EXISTS localbakery.images
+(
+    imageId           INT AUTO_INCREMENT PRIMARY KEY,
+    imageUrl VARCHAR(255),
+    reviewId INT NOT NULL,
+    modifiedAt        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    createdAt         TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT FK_review_image FOREIGN KEY(reviewId) REFERENCES reviews(reviewId) ON DELETE CASCADE
+) ENGINE = INNODB;

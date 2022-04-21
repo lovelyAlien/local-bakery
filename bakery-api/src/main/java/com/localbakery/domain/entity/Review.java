@@ -8,6 +8,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +28,9 @@ public class Review {
 //    @ManyToOne
 //    @JoinColumn(name="storeId")
 //    private Store store;
+
+    @OneToMany(mappedBy = "")
+    private List<ReviewImage> images=new ArrayList<>();
 
     @Column(name= "storeId")
     private Long storeId;
