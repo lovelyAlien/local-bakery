@@ -40,19 +40,6 @@ public class ReviewController {
 
     }
 
-//    @RequestMapping(value = "reviews/review", method = RequestMethod.POST)
-//    public ResponseContainer<Long> write(@AuthenticationPrincipal UserPrincipal userPrincipal, @RequestBody ReviewRequestVo reviewRequestVo) {
-//
-//
-//        Long reviewId = reviewService.write(userPrincipal, reviewRequestVo);
-//        return ResponseContainer.<Long>builder()
-//                .rMessage("OK")
-//                .rCode("200")
-//                .rData(reviewId)
-//                .build();
-//
-//    }
-
 
     @RequestMapping(value = "reviews/{id}", method = RequestMethod.PUT)
     public ResponseContainer<Long> modify(@PathVariable Long id, @RequestBody ReviewRequestVo reviewRequestVo) {
@@ -89,7 +76,7 @@ public class ReviewController {
     }
 
     @RequestMapping(value = "stores/{storeId}/reviews/{id}", method = RequestMethod.GET)
-    public ResponseContainer<ReviewResponseVo> findOne(@PathVariable Long id) {
+    public ResponseContainer<ReviewResponseVo> findOne(@PathVariable Long id, @PathVariable String storeId) {
 
         ReviewResponseVo review = reviewService.findOne(id);
 

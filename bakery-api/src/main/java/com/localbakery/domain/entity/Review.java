@@ -30,7 +30,7 @@ public class Review {
 //    @JoinColumn(name="storeId")
 //    private Store store;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
     @JsonIgnore //JSON 변환시 무한 루프 방지용
     private List<ReviewImage> images=new ArrayList<>();
 
