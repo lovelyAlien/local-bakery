@@ -30,7 +30,7 @@ public class ReviewImage {
 //    @Column(name="reviewId")
 //    private Long reviewId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewId")
     private Review review;
 

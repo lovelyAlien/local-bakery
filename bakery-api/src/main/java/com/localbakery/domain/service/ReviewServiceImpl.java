@@ -104,13 +104,15 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<ReviewResponseVo> findAll(Long storeId) {
 
-//        return reviewRepository.findAllByStoreId(storeId);
         List<Review> reviews = reviewRepository.findAllByStoreId(storeId);
-        return reviews.stream()
-                .map(review -> new ReviewResponseVo(review))
-                .collect(Collectors.toList());
-
-
+        List<ReviewResponseVo> reviewResponseVos=new ArrayList<>();
+        for(Review review: reviews){
+            List<String> imageUrls= review.getImages().stream()
+                    .map(image->image.getImageUrl())
+                    .collect(Collectors.toList());
+            reviewResponseVos.add(new ReviewResponseVo(review, imageUrls));
+        }
+        return reviewResponseVos;
     }
 
     @Override
