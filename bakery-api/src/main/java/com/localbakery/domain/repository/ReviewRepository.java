@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
-
+    @Query("SELECT DISTINCT r from Review r join fetch r.images")
     List<Review> findAllByStoreId(Long storeId);
 }
