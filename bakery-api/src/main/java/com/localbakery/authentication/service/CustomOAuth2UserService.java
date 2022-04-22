@@ -1,11 +1,10 @@
 package com.localbakery.authentication.service;
 
-import com.localbakery.authentication.domain.Account;
+import com.localbakery.account.domain.Account;
 import com.localbakery.authentication.oauth2.OAuth2UserInfo;
 import com.localbakery.authentication.oauth2.OAuth2UserInfoFactory;
 import com.localbakery.authentication.oauth2.UserPrincipal;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -17,13 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 @Transactional
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
-    @Autowired
-    private MapperService mapperService;
+    private final AccountService accountService;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
@@ -44,12 +42,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory
                 .getOAuth2UserInfo(userRequest.getClientRegistration().getRegistrationId(), oAuth2User.getAttributes());
 
-        Optional<Account> userOptional = mapperService.findByEmail(oAuth2UserInfo.getEmail());
+        Optional<Account> userOptional = accountService.findByEmail(oAuth2UserInfo.getEmail());
         Account account;
 
         if (userOptional.isPresent()) {
             account = userOptional.get();
-
         } else {
             account = registerNewUser(userRequest, oAuth2UserInfo);
         }
@@ -58,7 +55,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
     //DB에 없을 때, 등록
     private Account registerNewUser(OAuth2UserRequest userRequest, OAuth2UserInfo oAuth2UserInfo) {
-        return mapperService.saveAccount(
+        return accountService.saveAccount(
                 Account.builder()
                         .userName(oAuth2UserInfo.getName())
                         .email(oAuth2UserInfo.getEmail())

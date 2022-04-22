@@ -53,6 +53,15 @@ public class Store {
     @Column(name = "address")
     private String address;
 
+    @Column(name= "ratingAverage")
+    private float ratingAverage;
+
+    @Column(name= "totalCount")
+    private int totalCount;
+
+    @Column(name= "totalRating")
+    private float totalRating;
+
     @Column(name = "homePageUrl")
     private String homePageUrl;
 
@@ -86,5 +95,27 @@ public class Store {
 
     public enum storeType {
         BAKERY
+    }
+
+
+    public void rating(float rating){
+        this.totalCount+=1;
+        this.totalRating+=rating;
+        this.ratingAverage=(float)(this.totalRating/this.totalCount);
+    }
+
+    public void updateRating(float before_rating, float after_rating){
+        this.totalRating=this.totalRating-before_rating+after_rating;
+        this.ratingAverage=(float)(this.totalRating/this.totalCount);
+    }
+
+    public void deleteRating(float rating){
+        this.totalCount-=1;
+        this.totalRating-=rating;
+
+        if(totalCount==0)
+            this.ratingAverage=0;
+        else
+            this.ratingAverage=(float)(this.totalRating/this.totalCount);
     }
 }

@@ -1,5 +1,6 @@
 package com.localbakery.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.localbakery.domain.model.ReviewRequestVo;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +29,10 @@ public class Review {
 //    @ManyToOne
 //    @JoinColumn(name="storeId")
 //    private Store store;
+
+    @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
+    @JsonIgnore //JSON 변환시 무한 루프 방지용
+    private List<ReviewImage> images=new ArrayList<>();
 
     @Column(name= "storeId")
     private Long storeId;
@@ -65,5 +72,9 @@ public class Review {
         this.contents=reviewRequestVo.getContents();
         this.specials=reviewRequestVo.getSpecials();
         this.recommends=reviewRequestVo.getRecommends();
+    }
+
+    public void setImages(List<ReviewImage> reviewImages){
+        this.images=reviewImages;
     }
 }

@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -23,17 +24,18 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-
-
     @RequestMapping(value = "reviews/review", method = RequestMethod.POST)
-    public ResponseContainer<Long> write(@AuthenticationPrincipal UserPrincipal userPrincipal,@RequestBody ReviewRequestVo reviewRequestVo) {
+    public ResponseContainer<ReviewResponseVo> write(
+            @RequestPart(value="files", required=false) List<MultipartFile> files,
+            @AuthenticationPrincipal UserPrincipal userPrincipal,
+            @RequestPart(value="reviewRequestVo", required=false) ReviewRequestVo reviewRequestVo) {
 
 
-        Long reviewId= reviewService.write(userPrincipal, reviewRequestVo);
-        return ResponseContainer.<Long>builder()
+        ReviewResponseVo reviewResponseVo = reviewService.write(files, userPrincipal, reviewRequestVo);
+        return ResponseContainer.<ReviewResponseVo>builder()
                 .rMessage("OK")
                 .rCode("200")
-                .rData(reviewId)
+                .rData(reviewResponseVo)
                 .build();
 
     }
@@ -52,7 +54,7 @@ public class ReviewController {
 
     @RequestMapping(value = "reviews/{id}", method = RequestMethod.DELETE)
     public ResponseContainer<Long> delete(@PathVariable Long id) {
-        Long reviewId= reviewService.delete(id);
+        Long reviewId = reviewService.delete(id);
 
         return ResponseContainer.<Long>builder()
                 .rMessage("OK")
@@ -64,21 +66,21 @@ public class ReviewController {
     @RequestMapping(value = "stores/{id}/reviews", method = RequestMethod.GET)
     public ResponseContainer<List<ReviewResponseVo>> findAll(@PathVariable Long id) {
 
-        List<ReviewResponseVo> reviews= reviewService.findAll(id);
+        List<ReviewResponseVo> reviews = reviewService.findAll(id);
 
-        return ResponseContainer.<List<ReviewResponseVo>> builder()
+        return ResponseContainer.<List<ReviewResponseVo>>builder()
                 .rMessage("OK")
                 .rCode("200")
                 .rData(reviews)
                 .build();
     }
 
-    @RequestMapping(value= "stores/{storeId}/reviews/{id}", method = RequestMethod.GET)
-    public ResponseContainer<ReviewResponseVo> findOne(@PathVariable Long id){
+    @RequestMapping(value = "stores/{storeId}/reviews/{id}", method = RequestMethod.GET)
+    public ResponseContainer<ReviewResponseVo> findOne(@PathVariable Long id, @PathVariable String storeId) {
 
-        ReviewResponseVo review= reviewService.findOne(id);
+        ReviewResponseVo review = reviewService.findOne(id);
 
-        return ResponseContainer.<ReviewResponseVo> builder()
+        return ResponseContainer.<ReviewResponseVo>builder()
                 .rMessage("OK")
                 .rCode("200")
                 .rData(review)
