@@ -42,7 +42,9 @@ public class ReviewController {
 
 
     @RequestMapping(value = "reviews/{id}", method = RequestMethod.PUT)
-    public ResponseContainer<Long> modify(@PathVariable Long id, @RequestBody ReviewRequestVo reviewRequestVo) {
+    public ResponseContainer<Long> modify(
+            @PathVariable Long id,
+            @RequestBody ReviewRequestVo reviewRequestVo) {
 
         Long reviewId = reviewService.modify(id, reviewRequestVo);
         return ResponseContainer.<Long>builder()

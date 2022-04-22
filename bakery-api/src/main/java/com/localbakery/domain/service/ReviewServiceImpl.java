@@ -71,6 +71,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    @Transactional
     public Long modify(Long reviewId, ReviewRequestVo reviewRequestVo) {
 
         Store store = storeRepository.findById(reviewRequestVo.getStoreId()).get();
@@ -83,8 +84,6 @@ public class ReviewServiceImpl implements ReviewService {
         store.updateRating(before_rating, after_rating);
 
         review.update(reviewRequestVo);
-
-        reviewRepository.save(review);
 
         return review.getReviewId();
 
