@@ -1,14 +1,16 @@
-package com.localbakery.search.model;
+package com.localbakery.api.controller.dto;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 
+@Data
 @Builder
-@Getter
-public class  StoreSearchRequest {
-
+public class PointDTO {
     private Double leftBottomLongitude;
+
     private Double leftBottomLatitude;
+
     private Double rightTopLongitude;
+
     private Double rightTopLatitude;
 }

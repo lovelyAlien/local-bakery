@@ -13,8 +13,8 @@ import org.springframework.stereotype.Repository;
 public interface StoreRepository extends JpaRepository<Store, Long> {
     @Query(value = "SELECT * " +
             "FROM stores s " +
-            "WHERE ST_X(location) > :longitude and ST_X(location) < :longitude2 and ST_Y(location) > :latitude and ST_Y(location) < :latitude2"
+            "WHERE ST_X(location) > :leftBottomLongitude and ST_X(location) < :rightTopLongitude and ST_Y(location) > :leftBottomLatitude and ST_Y(location) < :rightTopLatitude"
             , nativeQuery = true
     )
-    Slice<Store> findAllByLocationIsNear(@Param("longitude") Double longitude, @Param("latitude") Double latitude, @Param("longitude2") Double longitude2, @Param("latitude2") Double latitude2, Pageable pageable);
+    Slice<Store> findAllByLocationIsNear(@Param("leftBottomLongitude") Double leftBottomLongitude, @Param("leftBottomLatitude") Double leftBottomLatitude, @Param("rightTopLongitude") Double rightTopLongitude, @Param("rightTopLatitude") Double rightTopLatitude, Pageable pageable);
 }

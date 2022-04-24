@@ -26,9 +26,10 @@ public class S3UploadService {
     private String s3BaseUrl;
 
     @Value("#{aws['cloud.aws.s3.bucket']}")
+
     private String bucketName;
 
-    @Value("/images")
+    @Value("images")
     private String folderName;
 
     private AmazonS3 amazonS3Client;
@@ -42,16 +43,20 @@ public class S3UploadService {
     }
 
     @Transactional
-    public Map<String, String> updateProfileImage(String userName, MultipartFile profileImage) {
-        Account user = accountRepository.findByUserName(userName);
+    public String updateProfileImage(String email, MultipartFile profileImage) {
+        Account user = accountRepository.findByEmail(email);
 
-        Map<String, String> result = uploadFileToS3(profileImage);
+        String s3Url = "https://localbakery.s3.amazonaws.com/images/";
 
-        user.setImageUrl(result.get("imageUrl"));
+        Map<String, String> filePath = uploadFileToS3(profileImage);
+
+        String imageUrl = s3Url + filePath.get("fileUrl").split("images")[1];
+
+        user.setImageUrl(imageUrl);
 
         accountRepository.save(user);
 
-        return result;
+        return imageUrl;
     }
 
     public Map<String, String> uploadFileToS3(MultipartFile multipartfile) {
