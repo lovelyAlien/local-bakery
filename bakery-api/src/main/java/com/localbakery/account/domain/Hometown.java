@@ -27,7 +27,7 @@ public class Hometown {
     @Column(name = "hometownId")
     private Long id;
 
-    @Column(name= "location")
+    @Column(name= "address")
     private Point address;
 
     public Hometown(Point address) {

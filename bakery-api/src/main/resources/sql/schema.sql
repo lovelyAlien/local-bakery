@@ -40,7 +40,7 @@ DROP TABLE IF EXISTS localbakery.hometown;
 CREATE TABLE iF NOT EXISTS localbakery.hometown
 (
     hometownId INT AUTO_INCREMENT PRIMARY KEY ,
-    location          POINT NOT NULL
+    address          POINT NOT NULL
 ) ENGINE = INNODB;
 
 DROP TABLE IF EXISTS localbakery.store_menus;
