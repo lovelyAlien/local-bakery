@@ -32,7 +32,8 @@ CREATE TABLE iF NOT EXISTS localbakery.accounts
     accountId INT AUTO_INCREMENT PRIMARY KEY,
     email     VARCHAR(255),
     userName  VARCHAR(255),
-    imageUrl  VARCHAR(255)
+    imageUrl  VARCHAR(255),
+    hometownId INT
 ) ENGINE = INNODB;
 
 DROP TABLE IF EXISTS localbakery.hometown;
