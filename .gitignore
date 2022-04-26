@@ -517,6 +517,6 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,vim,linux,macos,windows,intellij+all,intellij,git,emacs,clion,eclipse,obsidian,web,netbeans
 
+# ignore properties file
 application.properties
-aws.yml
-
+aws.properties

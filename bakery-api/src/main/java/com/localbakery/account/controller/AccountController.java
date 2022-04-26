@@ -12,12 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class AccountController {
 
@@ -30,8 +28,9 @@ public class AccountController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
-    @PostMapping("/api/account/hometown")
-    public ResponseContainer<Long> registerHometown(@RequestParam("longitude") Long longitude, @RequestParam("latitude") Long latitude) {
+    @PostMapping("api/account/hometown")
+    public ResponseContainer<Long> registerHometown(@RequestParam("longitude") Long longitude,
+                                                    @RequestParam("latitude") Long latitude) {
         GeometryFactory geometryFactory = new GeometryFactory();
         Point point = geometryFactory.createPoint(new Coordinate(longitude, latitude));
 

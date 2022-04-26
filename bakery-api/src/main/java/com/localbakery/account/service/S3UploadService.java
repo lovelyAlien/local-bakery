@@ -22,10 +22,11 @@ import java.util.Map;
 @Service
 public class S3UploadService {
 
-    @Value("http://localbakery.s3-website.ap-northeast-2.amazonaws.com")
+    @Value("#{aws['cloud.aws.s3.bucket.url']}")
     private String s3BaseUrl;
 
-    @Value("localbakery")
+    @Value("#{aws['cloud.aws.s3.bucket']}")
+
     private String bucketName;
 
     @Value("images")
@@ -82,10 +83,10 @@ public class S3UploadService {
                         .withCannedAcl(CannedAccessControlList.PublicRead));
 
                 /* Url location of the uploaded file in S3. You should save it in database */
-                String s3FileAccessUrl = s3BaseUrl.concat(bucketName).concat(folderName).concat(file.getName())
+                String s3FileAccessUrl = s3BaseUrl.concat(folderName).concat(file.getName())
                         .replaceAll("\\s", "+");
 
-                response.put("fileUrl", s3FileAccessUrl);
+                response.put("imageUrl", s3FileAccessUrl);
 
                 file.delete();
 
