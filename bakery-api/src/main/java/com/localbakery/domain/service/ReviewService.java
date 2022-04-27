@@ -16,7 +16,7 @@ public interface ReviewService {
 
     Long delete(Long reviewId);
 
-    List<ReviewResponseVo> findAll(Long storeId);
+    List<ReviewResponseVo> findAll(Long storeId, int page, int size);
 
     ReviewResponseVo findOne(Long reviewId);
 
