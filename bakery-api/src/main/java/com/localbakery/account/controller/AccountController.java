@@ -28,7 +28,7 @@ public class AccountController {
         return ResponseEntity.ok(new AuthResponse(token));
     }
 
-    @PostMapping("api/account/hometown")
+    @PostMapping("/api/account/hometown")
     public ResponseContainer<Long> registerHometown(@RequestParam("longitude") Long longitude,
                                                     @RequestParam("latitude") Long latitude) {
         GeometryFactory geometryFactory = new GeometryFactory();

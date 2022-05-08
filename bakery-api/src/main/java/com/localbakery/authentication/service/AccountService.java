@@ -15,8 +15,7 @@ public class AccountService {
 
     public final AccountRepository accountRepository;
     public Account saveAccount(Account account) {
-        Account newAccount = new Account(account.getEmail(), account.getUserName());
-        return accountRepository.save(newAccount);
+        return accountRepository.save(account);
     }
 
     public Optional<Account> findByEmail(String email) {
