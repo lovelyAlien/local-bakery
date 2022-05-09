@@ -1,5 +1,6 @@
 package com.localbakery.account.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 
 @Getter
@@ -30,6 +32,10 @@ public class Account {
     private String userName;
 
     private String imageUrl;
+
+    @NotBlank
+    @JsonIgnore
+    private String roles;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hometownId")
