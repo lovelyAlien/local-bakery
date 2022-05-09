@@ -1,6 +1,5 @@
 package com.localbakery;
 
-import com.localbakery.authentication.oauth2.AppProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -13,18 +12,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @EnableJpaAuditing
 @SpringBootApplication (scanBasePackages = "com.localbakery")
-@EnableConfigurationProperties(AppProperties.class)
 @EnableWebMvc
 public class LocalBakeryApplication {
 
-
-
-
-
     public static void main(String[] args) {
         SpringApplication.run(LocalBakeryApplication.class, args);
-
-
     }
 
     @Bean

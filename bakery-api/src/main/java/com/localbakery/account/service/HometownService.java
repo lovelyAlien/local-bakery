@@ -27,7 +27,7 @@ public class HometownService {
 
         hometownRepository.save(hometown);
 
-        Account user = accountRepository.findByEmail(userEmail);
+        Account user = accountRepository.findByEmail(userEmail).orElse(null);
 
         user.setHometown(hometown);
 

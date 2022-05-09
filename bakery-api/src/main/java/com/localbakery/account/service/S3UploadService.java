@@ -44,7 +44,7 @@ public class S3UploadService {
 
     @Transactional
     public String updateProfileImage(String email, MultipartFile profileImage) {
-        Account user = accountRepository.findByEmail(email);
+        Account user = accountRepository.findByEmail(email).orElse(null);
 
         String s3Url = "https://localbakery.s3.amazonaws.com/images/";
 
