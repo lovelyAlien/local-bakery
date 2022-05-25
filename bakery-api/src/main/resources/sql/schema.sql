@@ -72,14 +72,17 @@ CREATE TABLE IF NOT EXISTS localbakery.reviews
     createdAt     TIMESTAMP      DEFAULT CURRENT_TIMESTAMP
 ) ENGINE = INNODB;
 
-# DROP TABLE IF EXISTS localbakery.accounts;
-# CREATE TABLE IF NOT EXISTS localbakery.accounts
-# (
-#     id           INT AUTO_INCREMENT PRIMARY KEY,
-#     email VARCHAR(255),
-#     user_name VARCHAR(255)
-#
-# ) ENGINE = INNODB;
+DROP TABLE IF EXISTS localbakery.accounts;
+CREATE TABLE IF NOT EXISTS localbakery.accounts
+(
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(50),
+    user_name VARCHAR(50),
+    imageUrl VARCHAR(255),
+    roles  VARCHAR(50),
+    hometownId INT,
+    FOREIGN KEY (hometownId) REFERENCES hometown(hometownId)
+) ENGINE = INNODB;
 
 DROP TABLE IF EXISTS localbakery.images;
 CREATE TABLE IF NOT EXISTS localbakery.images

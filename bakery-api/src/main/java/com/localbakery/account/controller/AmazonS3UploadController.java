@@ -1,7 +1,7 @@
 package com.localbakery.account.controller;
 
 import com.localbakery.account.service.S3UploadService;
-import com.localbakery.api.controller.common.ResponseContainer;
+import com.localbakery.messages.ResponseContainer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;

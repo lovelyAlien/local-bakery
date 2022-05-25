@@ -6,6 +6,6 @@ import org.springframework.data.domain.Slice;
 
 @Builder
 @Getter
-public class SearchResponseVo {
-    private final Slice<StoreBo> stores;
+public class StoreSearchResponse {
+    private Slice<StoreBo> stores;
 }
