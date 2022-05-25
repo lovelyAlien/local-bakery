@@ -2,7 +2,7 @@ package com.localbakery.account.controller;
 
 
 import com.localbakery.account.service.HometownService;
-import com.localbakery.api.controller.common.ResponseContainer;
+import com.localbakery.messages.ResponseContainer;
 import com.localbakery.authentication.payload.AuthResponse;
 import lombok.RequiredArgsConstructor;
 import org.locationtech.jts.geom.Coordinate;
@@ -10,8 +10,8 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -34,6 +34,7 @@ public class AccountController {
         GeometryFactory geometryFactory = new GeometryFactory();
         Point point = geometryFactory.createPoint(new Coordinate(longitude, latitude));
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Long hometownId = hometownService.register(SecurityContextHolder.getContext().getAuthentication().getName(), point);
 
         return ResponseContainer.<Long>builder()

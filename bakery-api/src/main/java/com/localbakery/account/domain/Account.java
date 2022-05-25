@@ -40,11 +40,4 @@ public class Account {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hometownId")
     private Hometown hometown;
-
-    //This might be null
-
-    public Account(String email, String userName) {
-        this.email = email;
-        this.userName = userName;
-    }
 }
