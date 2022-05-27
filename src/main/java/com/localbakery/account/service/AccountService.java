@@ -13,6 +13,9 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +26,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class AccountService {
+public class AccountService implements UserDetailsService {
 
     private final JwtUtils jwtUtils;
 
@@ -93,5 +96,10 @@ public class AccountService {
         } catch (GeneralSecurityException | IOException e) {
             return null;
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return null;
     }
 }
