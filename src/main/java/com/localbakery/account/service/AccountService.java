@@ -8,6 +8,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.localbakery.account.domain.Account;
 import com.localbakery.account.repository.AccountRepository;
 import com.localbakery.authentication.dto.IdTokenRequest;
+import com.localbakery.authentication.exception.ResourceNotFoundException;
 import com.localbakery.authentication.oauth2.UserPrincipal;
 import com.localbakery.authentication.util.JwtUtils;
 import lombok.AllArgsConstructor;
@@ -107,6 +108,16 @@ public class AccountService implements UserDetailsService {
           .orElseThrow(() ->
             new UsernameNotFoundException("User not found with email : " + email)
           );
+
+        return UserPrincipal.create(user);
+    }
+
+
+    @Transactional
+    public UserDetails loadUserById(Long id) {
+        Account user = findById(id).orElseThrow(
+          () -> new ResourceNotFoundException("User", "id", id)
+        );
 
         return UserPrincipal.create(user);
     }
