@@ -8,6 +8,7 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.localbakery.account.domain.Account;
 import com.localbakery.account.repository.AccountRepository;
 import com.localbakery.authentication.dto.IdTokenRequest;
+import com.localbakery.authentication.oauth2.UserPrincipal;
 import com.localbakery.authentication.util.JwtUtils;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -99,7 +100,14 @@ public class AccountService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+    @Transactional
+    public UserDetails loadUserByUsername(String email)
+      throws UsernameNotFoundException {
+        Account user = accountService.findByEmail(email)
+          .orElseThrow(() ->
+            new UsernameNotFoundException("User not found with email : " + email)
+          );
+
+        return UserPrincipal.create(user);
     }
 }
