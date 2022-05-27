@@ -103,7 +103,7 @@ public class AccountService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String email)
       throws UsernameNotFoundException {
-        Account user = accountService.findByEmail(email)
+        Account user = findByEmail(email)
           .orElseThrow(() ->
             new UsernameNotFoundException("User not found with email : " + email)
           );
